@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Certificación Profesional - Login</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="main-container">
+
+        <div id="login-screen">
+            <h1>Portal de Ingreso para Evaluación Técnica</h1> <div class="login-form">
+                <input type="text" id="username" placeholder="Nombre de Usuario" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button id="login-button">Ingresar al Sistema</button>
+            </div>
+            <div id="login-message"></div>
+        </div>
+        <div id="start-screen">
+            <h1>Certificación: Fundamentos de Redes y Aplicaciones</h1>
+            <p>Este es un examen de nivel fundamental. Tienes 15 minutos para responder 10 preguntas. ¡Demuestra tu conocimiento de protocolos y arquitectura!</p>
+
+            <div class="theme-selector">
+                <p>Elige un tema visual:</p>
+                <div class="toggle-switch">
+                    <input type="radio" id="light-mode" name="theme" value="light" checked>
+                    <label for="light-mode" class="toggle-label" data-theme="light">Claro</label>
+
+                    <input type="radio" id="dark-mode" name="theme" value="dark">
+                    <label for="dark-mode" class="toggle-label" data-theme="dark">Oscuro</label>
+
+                    <input type="radio" id="red-mode" name="theme" value="red">
+                    <label for="red-mode" class="toggle-label" data-theme="red">Rojo</label>
+
+                    <span class="toggle-slider"></span>
+                </div>
+                </div>
+
+            <button id="start-button">Comenzar Examen</button>
+        </div>
+
+        <div class="quiz-container" id="quiz">
+            <div id="initial-motivation">
+                ¡**Consejo:** Tómate tu tiempo! Revisa la capa de red y las arquitecturas de aplicaciones.
+            </div>
+
+            <div class="header-top">
+                <p id="progress-text" class="progress-text"></p>
+                <div id="timer">15:00</div>
+            </div>
+
+            <h2 id="question">Cargando pregunta...</h2>
+
+            <div id="options" class="options-container">
+                </div>
+
+            <div class="navigation-buttons">
+                <button id="prev-button" disabled>← Anterior</button>
+                <button id="submit">Siguiente Pregunta</button>
+            </div>
+        </div>
+
+        <div id="results" class="results-container">
+            <h2>Reporte de Resultados y Análisis</h2>
+            <div id="final-summary"></div>
+            <div id="score-block">
+                <span id="score-text"></span>
+                <div id="grade-motivation"></div>
+            </div>
+
+            <div id="feedback-list">
+                </div>
+            <button onclick="restartQuizAfterResults()" style="margin-top: 30px; padding: 10px 20px; background-color: var(--color-button-secondary); color: white; border: none; border-radius: 6px; cursor: pointer;">Reintentar Examen</button>
+        </div>
+    </div>
+
+    <div id="luck-message">
+        ¡Concentración!
+        <p style="font-size: 0.3em; margin-top: 20px; color: var(--color-primary);">La prueba comienza en breve...</p>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
