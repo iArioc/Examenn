@@ -1,8 +1,10 @@
 // JAVASCRIPT: Lógica del Examen con Login y Persistencia
 
-        // --- CREDENCIALES OCULTAS ---
-        const CORRECT_USERNAME = 'Kvnsierra23';
-        const CORRECT_PASSWORD = 'Keko25';
+        // --- CREDENCIALES OCULTAS (ACTUALIZADAS PARA MÚLTIPLES USUARIOS) ---
+        const VALID_USERS = [
+            { username: 'Kvnsierra23', password: 'Keko25' },
+            { username: 'Nthfontanez', password: 'Natasha2002' } // ¡NUEVO USUARIO AÑADIDO!
+        ];
 
         const TIME_LIMIT_SECONDS = 900; // 15 minutos
         let timeLeft = TIME_LIMIT_SECONDS;
@@ -82,7 +84,7 @@
             return false;
         }
 
-        // --- LÓGICA DE LOGIN ---
+        // --- LÓGICA DE LOGIN (ACTUALIZADA) ---
 
         function handleLogin() {
             const user = usernameInput.value.trim();
@@ -93,7 +95,10 @@
             loginMessage.style.visibility = 'hidden';
             loginMessage.style.opacity = '0';
 
-            if (user === CORRECT_USERNAME && pass === CORRECT_PASSWORD) {
+            // VERIFICA SI EL USUARIO Y CONTRASEÑA COINCIDEN CON CUALQUIER PAR VÁLIDO
+            const accessGranted = VALID_USERS.some(u => u.username === user && u.password === pass);
+
+            if (accessGranted) {
 
                 loginMessage.innerText = '¡Acceso Concedido!';
                 loginMessage.style.visibility = 'visible';
@@ -143,7 +148,7 @@
             document.body.classList.remove('dark-mode', 'light-mode', 'red-mode');
             if (themeName === 'dark') {
                 document.body.classList.add('dark-mode');
-            } else if (themeName === 'red') { // Nuevo modo "red"
+            } else if (themeName === 'red') { // Modo "red"
                 document.body.classList.add('red-mode');
             } else {
                 document.body.classList.add('light-mode'); // Default es light
@@ -154,7 +159,7 @@
         function loadThemePreference() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             setTheme(savedTheme);
-            // Ajusta para los nuevos IDs (light-mode, dark-mode, red-mode)
+            // Ajusta para los IDs del nuevo interruptor
             const themeRadio = document.getElementById(`${savedTheme}-mode`);
             if (themeRadio) {
                 themeRadio.checked = true;
