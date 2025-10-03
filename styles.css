@@ -1,0 +1,591 @@
+/* ====================================
+    VARIABLES DE COLOR (Para el modo Oscuro)
+    ==================================== */
+
+/* Paleta Clara (Default) */
+:root {
+    --color-primary: #0077B6; /* Azul Oscuro (Seriedad) */
+    --color-secondary: #00B4D8; /* Azul Claro (Acento) */
+    --color-bg-main: #f4f6f9; /* Fondo muy claro */
+    --color-card-bg: #ffffff; /* Fondo de tarjetas */
+    --color-text-main: #2c3e50; /* Texto oscuro */
+    --color-text-secondary: #7f8c8d; /* Texto gris */
+    --color-option-bg: #ecf0f1; /* Fondo de opción */
+    --color-option-selected: #e9f0f9; /* Selección suave */
+    --color-button-success: #2ecc71; /* Botón Siguiente/Finalizar */
+    --color-button-error: #e74c3c; /* Color para errores/alerta */
+    --color-button-secondary: #95a5a6; /* Botón Anterior */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Paleta Oscura (NEGRO PROFUNDO) */
+body.dark-mode {
+    --color-primary: #00bcd4; /* Azul Cyan */
+    --color-secondary: #00e5ff; /* Azul Cyan más claro */
+    --color-bg-main: #121212; /* Fondo Negro Profundo */
+    --color-card-bg: #1e1e1e; /* Fondo de tarjetas más oscuro */
+    --color-text-main: #e0e0e0; /* Texto gris claro */
+    --color-text-secondary: #b0b0b0; /* Texto gris */
+    --color-option-bg: #2a2a2a; /* Fondo de opción oscuro */
+    --color-option-selected: #005662; /* Selección azul oscuro */
+    --color-button-success: #66bb6a; /* Verde más brillante */
+    --color-button-error: #ef5350; /* Rojo más brillante */
+    --color-button-secondary: #757575; /* Gris */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Paleta Roja (NUEVO MODO) */
+body.red-mode {
+    --color-primary: #e53935; /* Rojo Vibrante */
+    --color-secondary: #ff5252; /* Rojo más claro */
+    --color-bg-main: #fbe9e7; /* Fondo rojo muy claro */
+    --color-card-bg: #ffffff; /* Fondo de tarjetas blanco */
+    --color-text-main: #3e2723; /* Texto marrón oscuro */
+    --color-text-secondary: #8d6e63; /* Texto marrón grisáceo */
+    --color-option-bg: #ffebee; /* Fondo de opción rosa muy claro */
+    --color-option-selected: #ffcdd2; /* Selección rosa */
+    --color-button-success: #43a047; /* Verde */
+    --color-button-error: #d32f2f; /* Rojo oscuro */
+    --color-button-secondary: #a1887f; /* Marrón grisáceo */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ====================================
+    ANIMACIONES
+    ==================================== */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseRed { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes bounceIn { 0%, 60%, 80%, 100% { transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; transform: scale3d(.3, .3, .3); } 60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); } 100% { opacity: 1; transform: scale3d(1, 1, 1); } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+
+
+/* ====================================
+    ESTILOS BASE
+    ==================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px;
+    transition: all 0.5s ease;
+}
+
+.main-container {
+    background-color: var(--color-card-bg);
+    padding: 40px 60px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    width: 90%;
+    max-width: 900px;
+    transition: all 0.5s ease;
+}
+
+h2 {
+    color: var(--color-primary);
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    border-bottom: 3px solid var(--color-secondary);
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+/* ====================================
+    PANTALLA DE LOGIN
+    ==================================== */
+#login-screen {
+    display: none; /* Inicia Oculto, se muestra con JS */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+#login-screen h1 {
+    color: var(--color-primary);
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-option-bg);
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    transition: border-color 0.3s;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.3);
+}
+
+#login-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 15px 40px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 119, 182, 0.3);
+}
+
+#login-button:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px rgba(0, 180, 216, 0.4);
+}
+
+#login-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+#login-message.error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--color-button-error);
+    border: 1px solid var(--color-button-error);
+    visibility: visible;
+    opacity: 1;
+    animation: shake 0.5s;
+}
+body.dark-mode #login-message.error {
+    background-color: rgba(192, 57, 43, 0.2);
+}
+
+/* ====================================
+    PANTALLA DE INICIO
+    ==================================== */
+#start-screen {
+    display: none; /* Inicia oculto */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+#start-screen h1 {
+    color: var(--color-primary);
+    font-size: 3.0em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+#start-screen p {
+    font-size: 1.2em;
+    color: var(--color-text-secondary);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contenedor del selector de tema */
+.theme-selector {
+    margin: 20px 0 50px 0;
+    padding: 15px 25px;
+    border-radius: 8px;
+    background-color: var(--color-option-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.theme-selector > p {
+    margin: 0 0 10px 0;
+    font-weight: 600 !important;
+    color: var(--color-text-main) !important;
+    font-size: 1em !important;
+    text-align: center;
+}
+
+/* --- NUEVOS ESTILOS PARA EL INTERRUPTOR DESLIZANTE --- */
+.toggle-switch {
+    position: relative;
+    display: flex; /* Para que los labels se organicen horizontalmente */
+    background-color: var(--color-option-bg); /* Fondo del interruptor */
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 5px;
+    width: 320px; /* Ancho total del interruptor */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Sombra interior */
+    margin-top: 20px;
+    font-size: 0.95em;
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+}
+
+.toggle-switch input[type="radio"] {
+    display: none; /* Oculta los radio buttons nativos */
+}
+
+.toggle-switch .toggle-label {
+    flex: 1; /* Para que cada label ocupe el mismo espacio */
+    padding: 10px 15px;
+    text-align: center;
+    color: var(--color-text-secondary); /* Color del texto cuando no está seleccionado */
+    cursor: pointer;
+    z-index: 1; /* Para que el texto esté por encima del slider */
+    transition: color 0.3s ease;
+    white-space: nowrap; /* Evita saltos de línea en los labels */
+}
+
+/* Efecto hover en los labels */
+.toggle-switch .toggle-label:hover {
+    color: var(--color-primary);
+}
+
+.toggle-switch .toggle-slider {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: calc(33.33% - 6.66px); /* 100% / 3 opciones - padding/margin */
+    height: calc(100% - 10px);
+    background-color: var(--color-primary); /* Color del "deslizador" */
+    border-radius: 50px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animación suave */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none; /* Para que no interfiera con los clics en los labels */
+}
+
+/* Posición del deslizador para el modo "Claro" */
+.toggle-switch input[id="light-mode"]:checked ~ .toggle-slider {
+    transform: translateX(0%);
+    background-color: var(--color-primary);
+}
+
+/* Posición del deslizador para el modo "Oscuro" */
+.toggle-switch input[id="dark-mode"]:checked ~ .toggle-slider {
+    transform: translateX(100%); /* Desplaza 100% para la segunda posición */
+    background-color: var(--color-primary);
+}
+
+/* Posición del deslizador para el modo "Rojo" */
+.toggle-switch input[id="red-mode"]:checked ~ .toggle-slider {
+    transform: translateX(200%); /* Desplaza 200% para la tercera posición */
+    background-color: var(--color-primary);
+}
+
+/* Color del texto del label seleccionado */
+.toggle-switch input[id="light-mode"]:checked + .toggle-label { color: white; font-weight: 600; }
+.toggle-switch input[id="dark-mode"]:checked + .toggle-label { color: white; font-weight: 600; }
+.toggle-switch input[id="red-mode"]:checked + .toggle-label { color: white; font-weight: 600; }
+/* --- FIN NUEVOS ESTILOS PARA EL INTERRUPTOR DESLIZANTE --- */
+
+#start-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 18px 70px;
+    border-radius: 8px;
+    font-size: 1.4em;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    font-weight: 700;
+    box-shadow: 0 6px 12px rgba(0, 119, 182, 0.4);
+    letter-spacing: 0.5px;
+}
+
+#start-button.resume-mode {
+    background-color: var(--color-button-success);
+    box-shadow: 0 6px 12px rgba(46, 204, 113, 0.4);
+}
+
+#start-button:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 180, 216, 0.5);
+}
+#start-button.resume-mode:hover {
+    background-color: #27ae60;
+    box-shadow: 0 8px 18px rgba(46, 204, 113, 0.6);
+}
+
+/* ====================================
+    OVERLAY DE SUERTE
+    ==================================== */
+#luck-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(244, 246, 249, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 4em;
+    font-weight: bold;
+    color: var(--color-button-success);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+body.dark-mode #luck-message {
+    background: rgba(44, 62, 80, 0.95);
+}
+
+#luck-message.show {
+    display: flex;
+    animation: bounceIn 1.0s forwards, fadeIn 0.5s forwards;
+    opacity: 1;
+}
+
+#luck-message.hide {
+    animation: fadeOut 0.5s forwards;
+    pointer-events: none;
+}
+
+/* ====================================
+    QUIZ
+    ==================================== */
+.quiz-container { display: none; padding: 0; }
+
+/* Encabezado del Quiz (con temporizador) */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-option-bg);
+}
+
+.progress-text {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+/* TEMPORIZADOR (CSS ACTUALIZADO) */
+#timer {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--color-primary);
+    transition: color 0.5s ease-in-out, transform 0.2s ease-in-out;
+    min-width: 120px;
+    text-align: right;
+}
+
+#timer.critical {
+    color: #dc3545;
+    animation: pulseRed 1.5s infinite;
+}
+
+/* Opciones */
+.options-container { display: flex; flex-direction: column; gap: 12px; }
+.option {
+    background-color: var(--color-option-bg);
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    line-height: 1.4;
+    font-weight: 500;
+    animation: slideInRight 0.4s ease-out;
+    color: var(--color-text-main);
+}
+
+.option:hover {
+    background-color: #fcfcfc;
+    border-color: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+body.dark-mode .option:hover {
+    background-color: #556b81;
+    border-color: var(--color-secondary);
+}
+
+.option.selected {
+    background-color: var(--color-option-selected);
+    border: 2px solid var(--color-primary);
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+body.dark-mode .option.selected {
+    color: var(--color-text-main);
+}
+
+/* Botones de Navegación */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.navigation-buttons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+#prev-button {
+    background-color: var(--color-button-secondary);
+    color: white;
+}
+
+#prev-button:hover:not(:disabled) {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+#prev-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#submit {
+    background-color: var(--color-button-success);
+    color: white;
+}
+
+#submit:hover:not(:disabled) {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+#submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* ====================================
+    RESULTADOS
+    ==================================== */
+#results { display: none; padding: 50px; }
+
+#final-summary {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--color-option-selected);
+    border-left: 5px solid var(--color-primary);
+    color: var(--color-text-main);
+}
+
+#score-block {
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 10px;
+    transition: background-color 0.5s;
+}
+
+#score-text {
+    font-size: 2.2em;
+    font-weight: 700;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#grade-motivation {
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Clases de Grado (Se aplican al score-block para el color de fondo) */
+.grade-A #score-text { background-color: #d4edda; color: #155724; }
+.grade-B #score-text { background-color: #cce5ff; color: #004085; }
+.grade-C #score-text { background-color: #fff3cd; color: #856404; }
+.grade-D #score-text, .grade-F #score-text { background-color: #f8d7da; color: #721c24; }
+
+.grade-A { background-color: #c3e6cb; border: 1px solid #c3e6cb; }
+.grade-B { background-color: #d1ecf1; border: 1px solid #bee5eb; }
+.grade-C { background-color: #ffeeba; border: 1px solid #ffeeba; }
+.grade-D, .grade-F { background-color: #f5c6cb; border: 1px solid #f5c6cb; }
+
+/* Aseguramos la visibilidad en modo Oscuro (para el bloque de score) */
+body.dark-mode .grade-A { background-color: #1f782f; color: #ecf0f1; border-color: #1f782f; }
+body.dark-mode .grade-B { background-color: #17a2b8; color: #ecf0f1; border-color: #17a2b8; }
+body.dark-mode .grade-C { background-color: #e67e22; color: #ecf0f1; border-color: #e67e22; }
+body.dark-mode .grade-D, body.dark-mode .grade-F { background-color: #c0392b; color: #ecf0f1; border-color: #c0392b; }
+
+body.dark-mode .grade-A #score-text { background-color: #27ae60; color: #ecf0f1; }
+body.dark-mode .grade-B #score-text { background-color: #3498db; color: #ecf0f1; }
+body.dark-mode .grade-C #score-text { background-color: #f39c12; color: #ecf0f1; }
+body.dark-mode .grade-D #score-text, body.dark-mode .grade-F #score-text { background-color: #e74c3c; color: #ecf0f1; }
+
+
+/* Contenedor de cada pregunta en la retroalimentación */
+.feedback-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid;
+    background-color: var(--color-card-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Respuestas CORRECTAS (VERDE) */
+.feedback-item.correct {
+    border-color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.1);
+}
+/* Respuestas INCORRECTAS (ROJO) */
+.feedback-item.incorrect {
+    border-color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.feedback-item p { margin: 5px 0; color: var(--color-text-main); }
+.feedback-item strong { color: var(--color-primary); }
+
+/* Estilo para la respuesta del usuario (gris/cursiva) */
+.feedback-item .user-answer {
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* Estilo para la respuesta correcta (VERDE SÓLIDO) */
+.feedback-item .correct-answer {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+/* Aseguramos la visibilidad en modo Oscuro */
+body.dark-mode .feedback-item.correct { background-color: rgba(46, 204, 113, 0.15); }
+body.dark-mode .feedback-item.incorrect { background-color: rgba(231, 76, 60, 0.15); }
+body.dark-mode .feedback-item .user-answer { color: #ccc; }
+body.dark-mode .feedback-item .correct-answer { color: #1abc9c; /* Verde adaptado a oscuro */ }
