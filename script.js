@@ -3,7 +3,7 @@
         // --- CREDENCIALES OCULTAS (ACTUALIZADAS PARA MÚLTIPLES USUARIOS) ---
         const VALID_USERS = [
             { username: 'Kvnsierra23', password: 'Keko25' },
-            { username: 'Nthfontanez', password: 'Natasha2002' } // ¡NUEVO USUARIO AÑADIDO!
+            { username: 'Nthfontanez', password: 'Natasha2002' }
         ];
 
         const TIME_LIMIT_SECONDS = 900; // 15 minutos
@@ -435,3 +435,4 @@
 
         // Inicializa, mostrando la pantalla de login
         showLoginScreen();
+
