@@ -1,26 +1,40 @@
 // JAVASCRIPT: Lógica del Examen con Login y Persistencia
 
-        // --- CREDENCIALES OCULTAS (ACTUALIZADAS PARA MÚLTIPLES USUARIOS) ---
+        // --- CREDENCIALES OCULTAS ---
         const VALID_USERS = [
             { username: 'Kvnsierra23', password: 'Keko25' },
-            { username: 'Nthfontanez', password: 'Natasha2002' }
+            { username: 'Nthfontanez', password: 'Nfa2002' }
         ];
 
-        const TIME_LIMIT_SECONDS = 900; // 15 minutos
+        const TIME_LIMIT_SECONDS = 1500; // 25 minutos (25 * 60) - ACTUALIZADO
         let timeLeft = TIME_LIMIT_SECONDS;
         let timerInterval;
 
         const quizQuestions = [
-            { question: "¿Qué capa del modelo OSI es responsable del **direccionamiento lógico** y el enrutamiento de paquetes entre redes?", options: { a: "Capa de Enlace de Datos", b: "Capa de Transporte", c: "Capa de Red", d: "Capa de Aplicación" }, correctAnswer: "c" },
-            { question: "¿Qué protocolo es **orientado a la conexión** y garantiza la entrega fiable de datos en el modelo TCP/IP?", options: { a: "UDP (User Datagram Protocol)", b: "IP (Internet Protocol)", c: "ARP (Address Resolution Protocol)", d: "TCP (Transmission Control Protocol)" }, correctAnswer: "d" },
-            { question: "¿En la arquitectura **Cliente-Servidor**, ¿cuál es el rol principal del servidor de aplicaciones (o backend)?", options: { a: "Mostrar la interfaz de usuario directamente al cliente.", b: "Gestionar la lógica de negocio y acceder a la base de datos.", c: "Convertir la dirección IP en dirección MAC.", d: "Proporcionar exclusivamente el servicio DNS." }, correctAnswer: "b" },
-            { question: "¿Qué significa el acrónimo **API** en el contexto del desarrollo de aplicaciones?", options: { a: "Application Processing Interface", b: "Advanced Program Integration", c: "Application Programming Interface", d: "Automatic Protocol Interpreter" }, correctAnswer: "c" },
-            { question: "¿Qué número de puerto estándar utiliza el protocolo **HTTP** para la comunicación web no segura?", options: { a: "21", b: "25", c: "80", d: "443" }, correctAnswer: "c" },
-            { question: "¿Cuál es el principal inconveniente de la arquitectura **Monolítica** en el desarrollo de aplicaciones?", options: { a: "Es muy fácil de escalar horizontalmente.", b: "La base de código está separada, lo que simplifica el desarrollo.", c: "Un fallo en una pequeña parte puede detener toda la aplicación.", d: "Requiere múltiples despliegues para cada cambio." }, correctAnswer: "c" },
-            { question: "¿Qué protocolo se utiliza en la capa de **Aplicación** para transferir archivos de forma bidireccional?", options: { a: "ICMP", b: "SSH", c: "FTP", d: "Telnet" }, correctAnswer: "c" },
-            { question: "¿Cuál es la función principal de un **Router** en una red?", options: { a: "Conectar dispositivos dentro de la misma subred (LAN).", b: "Replicar señales para aumentar la cobertura inalámbrica.", c: "Determinar el mejor camino para enviar paquetes a través de diferentes redes.", d: "Asignar direcciones MAC a las direcciones IP." }, correctAnswer: "c" },
-            { question: "¿Cuál de las siguientes **NO** es una ventaja de utilizar una arquitectura de **Microservicios**?", options: { a: "Permite el uso de diferentes tecnologías para cada servicio.", b: "Facilita la escalabilidad de componentes individuales.", c: "Aumenta la complejidad de la gestión de la red y el despliegue.", d: "Permite a los equipos trabajar independientemente." }, correctAnswer: "c" },
-            { question: "¿En el modelo **TCP/IP**, ¿qué protocolo se utiliza para el envío de correo electrónico?", options: { a: "POP3", b: "IMAP", c: "SMTP", d: "DHCP" }, correctAnswer: "c" }
+            // --- NUEVAS 10 PREGUNTAS (Reemplazan a las originales) ---
+            { question: "¿Qué protocolo trabaja en la Capa de Enlace de Datos (Capa 2) y es responsable de mapear direcciones IP a direcciones físicas (MAC)?", options: { a: "DHCP", b: "ARP (Address Resolution Protocol)", c: "DNS", d: "ICMP" }, correctAnswer: "b" },
+            { question: "¿Qué dispositivo se utiliza principalmente para **segmentar dominios de colisión** y operar en la Capa 2 del modelo OSI?", options: { a: "Repetidor (Repeater)", b: "Router", c: "Switch (Conmutador)", d: "Módem" }, correctAnswer: "c" },
+            { question: "¿Qué protocolo se utiliza para la **resolución de nombres de dominio** a direcciones IP?", options: { a: "TCP", b: "UDP", c: "DNS (Domain Name System)", d: "SNMP" }, correctAnswer: "c" },
+            { question: "¿Cuál es el puerto estándar utilizado por el protocolo **SSH** (Secure Shell) para la administración remota segura?", options: { a: "21", b: "22", c: "23", d: "80" }, correctAnswer: "b" },
+            { question: "¿Qué término describe un enfoque de desarrollo donde la aplicación se construye como un conjunto de servicios **independientes y acoplados laxamente**?", options: { a: "Arquitectura Monolítica", b: "Programación Orientada a Objetos", c: "Arquitectura de Microservicios", d: "Computación en Lote (Batch Computing)" }, correctAnswer: "c" },
+            { question: "¿Qué método HTTP se utiliza para **enviar datos** al servidor para crear un nuevo recurso?", options: { a: "GET", b: "PUT", c: "POST", d: "DELETE" }, correctAnswer: "c" },
+            { question: "¿Cuál de las siguientes afirmaciones es la característica principal de **UDP** (User Datagram Protocol) en comparación con TCP?", options: { a: "Garantiza la entrega de paquetes.", b: "Es orientado a la conexión.", c: "Es más rápido porque no requiere una conexión ni acuses de recibo.", d: "Utiliza un 'handshake' de tres vías." }, correctAnswer: "c" },
+            { question: "¿Qué nombre recibe la unidad de datos en la **Capa de Red** (Capa 3 del modelo OSI)?", options: { a: "Frame (Trama)", b: "Segment (Segmento)", c: "Packet (Paquete)", d: "Bit" }, correctAnswer: "c" },
+            { question: "¿Qué formato de datos es comúnmente utilizado para el intercambio de información entre el cliente y el servidor en las APIs REST?", options: { a: "XML", b: "HTML", c: "JSON (JavaScript Object Notation)", d: "YAML" }, correctAnswer: "c" },
+            { question: "¿Cuál de los siguientes es un ejemplo de base de datos **NoSQL**?", options: { a: "MySQL", b: "PostgreSQL", c: "MongoDB", d: "Oracle" }, correctAnswer: "c" },
+
+            // --- 10 PREGUNTAS MANTENIDAS (Añadidas anteriormente) ---
+            { question: "¿Qué componente hardware permite la conexión de múltiples dispositivos dentro de una misma red de área local (LAN)?", options: { a: "Router", b: "Modem", c: "Switch (Conmutador)", d: "Gateway" }, correctAnswer: "c" },
+            { question: "¿Cuál es la función del protocolo **DHCP**?", options: { a: "Traducir nombres de dominio a direcciones IP.", b: "Asignar direcciones IP y otros parámetros de red automáticamente.", c: "Transferir archivos de forma segura.", d: "Gestionar sesiones seguras en la capa de transporte." }, correctAnswer: "b" },
+            { question: "¿Qué diferencia principal existe entre **IPv4** e **IPv6** en términos de direccionamiento?", options: { a: "IPv4 usa direcciones de 64 bits, IPv6 usa 32 bits.", b: "IPv4 soporta enrutamiento jerárquico, IPv6 no.", c: "IPv6 utiliza direcciones de 128 bits, IPv4 utiliza 32 bits.", d: "IPv4 es más seguro por defecto que IPv6." }, correctAnswer: "c" },
+            { question: "¿Qué tipo de arquitectura de aplicación implica que el frontend y el backend están **estrechamente acoplados** y se ejecutan en el mismo proceso?", options: { a: "Distribuida", b: "Microservicios", c: "Orientada a Servicios (SOA)", d: "Monolítica" }, correctAnswer: "d" },
+            { question: "¿Qué protocolo de la capa de Aplicación se utiliza para acceder y gestionar buzones de correo electrónico de forma remota, permitiendo mantener los mensajes en el servidor?", options: { a: "POP3", b: "FTP", c: "IMAP", d: "SMTP" }, correctAnswer: "c" },
+            { question: "¿Cuál es el puerto estándar utilizado por el protocolo **HTTPS**?", options: { a: "80", b: "22", c: "443", d: "53" }, correctAnswer: "c" },
+            { question: "¿En el contexto de las bases de datos, ¿qué significa el acrónimo **SQL**?", options: { a: "Standard Query Language", b: "Sequential Query Logic", c: "Structured Query Language", d: "Systematic Question Logic" }, correctAnswer: "c" },
+            { question: "¿Qué capa del modelo OSI se encarga de la **presentación de los datos** (cifrado, compresión) para la capa de Aplicación?", options: { a: "Capa de Sesión", b: "Capa de Presentación", c: "Capa de Transporte", d: "Capa Física" }, correctAnswer: "b" },
+            { question: "¿Qué tecnología se utiliza para crear una **conexión segura y cifrada** a través de una red pública (como Internet)?", options: { a: "LAN", b: "VPN (Red Privada Virtual)", c: "ARP", d: "DNS" }, correctAnswer: "b" },
+            { question: "¿Qué método HTTP se utiliza típicamente para **solicitar un recurso** específico al servidor sin modificarlo (sólo lectura)?", options: { a: "POST", b: "PUT", c: "DELETE", d: "GET" }, correctAnswer: "d" }
+            // --- FIN DE PREGUNTAS ---
         ];
 
         // Referencias del DOM
@@ -84,7 +98,7 @@
             return false;
         }
 
-        // --- LÓGICA DE LOGIN (ACTUALIZADA) ---
+        // --- LÓGICA DE LOGIN ---
 
         function handleLogin() {
             const user = usernameInput.value.trim();
@@ -224,7 +238,8 @@
                 loadThemePreference();
             }
 
-            const originalText = 'Este es un examen de nivel fundamental. Tienes 15 minutos para responder 10 preguntas. ¡Demuestra tu conocimiento de protocolos y arquitectura!';
+            // Texto dinámico para reflejar el tiempo (25 min) y las preguntas (20)
+            const originalText = `Este es un examen de nivel fundamental. Tienes ${Math.floor(TIME_LIMIT_SECONDS / 60)} minutos para responder ${quizQuestions.length} preguntas. ¡Demuestra tu conocimiento de protocolos y arquitectura!`;
             const pElement = document.querySelector('#start-screen p');
 
             // Limpiamos listeners previos para evitar duplicados
@@ -432,7 +447,7 @@
 
         submitButton.addEventListener('click', handleNext);
         prevButton.addEventListener('click', handlePrevious);
+        // NOTA: Asegúrate de añadir el evento 'click' al botón de Reintentar en tu HTML.
 
         // Inicializa, mostrando la pantalla de login
         showLoginScreen();
-
